@@ -72,6 +72,10 @@ const DriftProviderContent: React.FC<DriftProviderProps> = ({ children }) => {
 					};
 
 					await newService.initialize(walletInterface);
+
+					// Fetch markets after initialization
+					await newService.fetchMarkets();
+
 					setDriftService(newService);
 					setState((prev) => ({
 						...prev,
@@ -107,6 +111,33 @@ const DriftProviderContent: React.FC<DriftProviderProps> = ({ children }) => {
 			});
 		}
 	}, [connected, publicKey, wallet]);
+
+	// Listen for state changes from DriftService
+	useEffect(() => {
+		if (driftService) {
+			const handleStateChange = (newState: any) => {
+				setState((prev) => ({
+					...prev,
+					...newState,
+				}));
+			};
+
+			const handleError = (error: any) => {
+				setState((prev) => ({
+					...prev,
+					error: error.message || 'DriftService error',
+				}));
+			};
+
+			driftService.on('stateChanged', handleStateChange);
+			driftService.on('error', handleError);
+
+			return () => {
+				driftService.off('stateChanged', handleStateChange);
+				driftService.off('error', handleError);
+			};
+		}
+	}, [driftService]);
 
 	const contextValue: DriftContextType = {
 		driftService,

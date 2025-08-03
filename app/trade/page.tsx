@@ -10,7 +10,7 @@ import { Chart } from '../../src/components/Chart';
 import { PositionsTable } from '../../src/components/PositionsTable';
 import { OrderForm } from '../../src/components/OrderForm';
 import { TokenBalances } from '../../src/components/TokenBalances';
-import { DebugPanel } from '../../src/components/DebugPanel';
+
 import { OrderFormData, UIMarketData } from '../../src/types';
 
 export default function TradePage() {
@@ -246,13 +246,6 @@ function TradePageContent() {
 						</div>
 					</div>
 				</div>
-
-				{/* Debug Panel (Development Only) */}
-				{process.env.NODE_ENV === 'development' && (
-					<div className="mt-6">
-						<DebugPanel />
-					</div>
-				)}
 			</div>
 		</div>
 	);

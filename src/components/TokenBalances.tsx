@@ -41,7 +41,10 @@ export const TokenBalances: React.FC = () => {
 			const tokenService = new TokenIntegrationService(connection);
 
 			// Debug: Try to fetch NG balance specifically
-			const ngBalance = await tokenService.getTokenBalance(publicKey, 'NG');
+			const ngBalance = await tokenService.getTokenBalanceBySymbol(
+				publicKey,
+				'NG'
+			);
 			console.log('💰 NG Balance result:', ngBalance);
 
 			const userBalances = await tokenService.getAllCommodityBalances(
@@ -176,7 +179,8 @@ export const TokenBalances: React.FC = () => {
 						const balance = balances.find(
 							(b) => b.mint === tokenConfig.mintAddress
 						);
-						const hasBalance = balance && balance.uiBalance > 0;
+						const hasBalance =
+							balance && balance.uiBalance && balance.uiBalance > 0;
 
 						return (
 							<div
