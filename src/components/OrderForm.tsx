@@ -56,7 +56,7 @@ export const OrderForm: React.FC<OrderFormProps> = ({
 		const price =
 			formData.orderType === 'market'
 				? selectedMarket.lastPrice
-				: parseFloat(formData.price) || selectedMarket.lastPrice;
+				: parseFloat(formData.price || '') || selectedMarket.lastPrice;
 
 		return amount * price;
 	}, [formData.amount, formData.price, formData.orderType, selectedMarket]);

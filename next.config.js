@@ -7,6 +7,7 @@ const nextConfig = {
     COMMITMENT: process.env.COMMITMENT,
     WS_URL: process.env.WS_URL,
   },
+
   webpack: (config, { isServer }) => {
     if (!isServer) {
       config.resolve.fallback = {
