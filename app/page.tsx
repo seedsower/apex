@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 
 export default function Home() {
 	const [mounted, setMounted] = useState(false);
@@ -38,9 +37,13 @@ export default function Home() {
 					</p>
 				</div>
 
-				{/* Wallet Connection */}
+				{/* Wallet Connection - Temporarily disabled for build fix */}
 				<div className="flex justify-center mb-12">
-					{mounted && <WalletMultiButton className="btn-primary" />}
+					{mounted && (
+						<div className="btn-primary px-6 py-3 rounded-lg">
+							Connect Wallet
+						</div>
+					)}
 				</div>
 
 				{/* Navigation */}
