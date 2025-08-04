@@ -79,7 +79,7 @@
 		"lint": "next lint",
 		"type-check": "tsc --noEmit",
 		"generate-docs": "typedoc --skipErrorChecking --logLevel Error",
-		"prepare": "husky install",
+		"prepare": "husky install || true",
 		"prettify": "prettier --check './sdk/src/**/*.ts' './tests/**.ts' './cli/**.ts' './src/**/*.{ts,tsx}' './app/**/*.{ts,tsx}'",
 		"prettify:fix": "prettier --write './sdk/src/**/*.ts' './tests/**.ts' './cli/**.ts' './src/**/*.{ts,tsx}' './app/**/*.{ts,tsx}'",
 		"lint:fix": "eslint . --ext ts,tsx --fix",
