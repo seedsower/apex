@@ -2,16 +2,7 @@
   "version": 2,
   "installCommand": "npm install --legacy-peer-deps",
   "buildCommand": "npm run build",
-  "outputDirectory": ".next",
   "framework": "nextjs",
-  "functions": {
-    "app/**/*.tsx": {
-      "runtime": "nodejs18.x"
-    },
-    "pages/**/*.tsx": {
-      "runtime": "nodejs18.x"
-    }
-  },
   "build": {
     "env": {
       "NEXT_TELEMETRY_DISABLED": "1"
