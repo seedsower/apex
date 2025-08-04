@@ -10,36 +10,12 @@ const nextConfig = {
   
   trailingSlash: false,
 
-  webpack: (config, { isServer }) => {
-    if (!isServer) {
-      config.resolve.fallback = {
-        ...config.resolve.fallback,
-        fs: false,
-        net: false,
-        tls: false,
-        child_process: false,
-        dns: false,
-        http2: false,
-        zlib: false,
-        crypto: require.resolve('crypto-browserify'),
-        stream: require.resolve('stream-browserify'),
-        buffer: require.resolve('buffer'),
-        process: require.resolve('process/browser'),
-        path: require.resolve('path-browserify'),
-        os: require.resolve('os-browserify/browser'),
-        url: require.resolve('url'),
-        util: require.resolve('util'),
-        // Node.js modules that shouldn't be included in browser bundle
-        'node-cache': false,
-        'gill': false,
-        '@triton-one/yellowstone-grpc': false,
-        '@openbook-dex/openbook-v2': false,
-        '@grpc/grpc-js': false,
-      };
-    }
-    
-
-    
+  webpack: (config) => {
+    config.resolve.fallback = {
+      fs: false,
+      net: false,
+      tls: false,
+    };
     return config;
   },
   
