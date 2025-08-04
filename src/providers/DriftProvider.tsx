@@ -45,11 +45,11 @@ const DriftProviderContent: React.FC<DriftProviderProps> = ({ children }) => {
 		rpcUrl:
 			process.env.NEXT_PUBLIC_RPC_URL ||
 			process.env.RPC_URL ||
-			'https://api.mainnet-beta.solana.com',
+			'https://rpc.helius.xyz/?api-key=demo', // Free RPC with CORS support
 		wsUrl:
 			process.env.NEXT_PUBLIC_WS_URL ||
 			process.env.WS_URL ||
-			'wss://api.mainnet-beta.solana.com',
+			'wss://rpc.helius.xyz/?api-key=demo', // Free WebSocket with CORS support
 		programId:
 			process.env.NEXT_PUBLIC_PROGRAM_ID ||
 			process.env.PROGRAM_ID ||
