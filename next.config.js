@@ -3,6 +3,7 @@ const nextConfig = {
   trailingSlash: false,
   generateEtags: false,
   poweredByHeader: false,
+  output: 'standalone',
   
   transpilePackages: [
     '@solana/web3.js',
