@@ -11,12 +11,6 @@ const nextConfig = {
   trailingSlash: false,
 
   webpack: (config, { isServer }) => {
-    // Ignore specific modules that cause build issues
-    config.ignoreWarnings = [
-      { module: /node_modules\/@solana/ },
-      { file: /node_modules\/@solana/ },
-    ];
-    
     if (!isServer) {
       config.resolve.fallback = {
         ...config.resolve.fallback,
@@ -51,11 +45,6 @@ const nextConfig = {
         fullySpecified: false,
       },
     });
-    
-    // Simple optimization to prevent module resolution issues
-    if (config.optimization) {
-      config.optimization.moduleIds = 'deterministic';
-    }
     
     return config;
   },
