@@ -38,13 +38,7 @@ const nextConfig = {
       };
     }
     
-    // Handle ES modules properly
-    config.module.rules.push({
-      test: /\.m?js$/,
-      resolve: {
-        fullySpecified: false,
-      },
-    });
+
     
     return config;
   },
