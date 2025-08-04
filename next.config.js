@@ -7,8 +7,16 @@ const nextConfig = {
     COMMITMENT: process.env.COMMITMENT,
     WS_URL: process.env.WS_URL,
   },
+  
+  trailingSlash: false,
 
   webpack: (config, { isServer }) => {
+    // Ignore specific modules that cause build issues
+    config.ignoreWarnings = [
+      { module: /node_modules\/@solana/ },
+      { file: /node_modules\/@solana/ },
+    ];
+    
     if (!isServer) {
       config.resolve.fallback = {
         ...config.resolve.fallback,
@@ -36,6 +44,7 @@ const nextConfig = {
       };
     }
     
+    // Handle ES modules properly
     config.module.rules.push({
       test: /\.m?js$/,
       resolve: {
@@ -43,9 +52,21 @@ const nextConfig = {
       },
     });
     
+    // Simple optimization to prevent module resolution issues
+    if (config.optimization) {
+      config.optimization.moduleIds = 'deterministic';
+    }
+    
     return config;
   },
-  transpilePackages: ['@solana/web3.js'],
+  
+  transpilePackages: [
+    '@solana/web3.js',
+    '@solana/wallet-adapter-base',
+    '@solana/wallet-adapter-react',
+    '@solana/wallet-adapter-react-ui',
+    '@solana/wallet-adapter-wallets'
+  ],
 }
 
 module.exports = nextConfig 
