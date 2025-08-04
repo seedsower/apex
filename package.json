@@ -86,7 +86,7 @@
 		"update-idl": "cp target/idl/drift.json sdk/src/idl/drift.json"
 	},
 	"engines": {
-		"node": ">=18.0.0",
+		"node": "20.x",
 		"npm": ">=8.0.0"
 	},
 	"name": "apex-commodities-trading-ui",
