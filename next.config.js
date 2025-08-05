@@ -3,6 +3,8 @@ const nextConfig = {
   trailingSlash: false,
   output: 'export',
   distDir: 'out',
+  basePath: '/apex',
+  assetPrefix: '/apex',
   images: {
     unoptimized: true
   },
