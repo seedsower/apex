@@ -4,8 +4,8 @@ const isGitHubPages = process.env.GITHUB_ACTIONS === 'true'
 
 const nextConfig = {
   trailingSlash: false,
-  output: 'export',
-  distDir: 'out',
+  ...(isProd && { output: 'export' }),
+  ...(isProd && { distDir: 'out' }),
   basePath: (isProd && isGitHubPages) ? '/apex' : '',
   assetPrefix: (isProd && isGitHubPages) ? '/apex' : '',
   images: {
