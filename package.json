@@ -74,6 +74,7 @@
 	"scripts": {
 		"dev": "next dev",
 		"build": "next build",
+		"railway-build": "npm install --legacy-peer-deps && npm run build",
 		"now-build": "next build",
 		"start": "next start",
 		"lint": "next lint",
