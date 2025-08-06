@@ -39,7 +39,7 @@ export default function TradePage() {
 function TradePageContent() {
 	// Safely use wallet hooks only after mounting
 	const { connected, publicKey } = useWallet();
-	const { driftService, state: driftState, isReady, createUser } = useDrift();
+	const { driftService, isReady, createUser } = useDrift();
 
 	const [userExists, setUserExists] = useState<boolean>(false);
 	const [isCreatingUser, setIsCreatingUser] = useState<boolean>(false);

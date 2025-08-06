@@ -65,55 +65,7 @@ export const TokenBalances: React.FC = () => {
 		}
 	};
 
-	const findMyNGToken = async () => {
-		if (!publicKey) return;
 
-		setLoading(true);
-		setError(null);
-
-		try {
-			console.log('🔍 Searching for NG token across networks...');
-
-			// First verify on current network
-			const currentNetworkResult = await verifyTokenOnNetwork(
-				connection,
-				publicKey.toString(),
-				COMMODITY_TOKENS.NG.mintAddress
-			);
-
-			if (currentNetworkResult.hasTokenAccount) {
-				console.log('✅ Found NG token on current network!');
-				setError('Token found on current network! Try refreshing balances.');
-				fetchBalances();
-				return;
-			}
-
-			console.log('🔍 Token not found on current network, searching others...');
-
-			// Search across networks
-			const foundNetwork = await findTokenNetwork(
-				publicKey.toString(),
-				COMMODITY_TOKENS.NG.mintAddress
-			);
-
-			if (foundNetwork) {
-				setError(
-					`NG token found on ${foundNetwork.network}! Current app is on ${connection.rpcEndpoint}. Switch networks or update your RPC URL.`
-				);
-			} else {
-				setError(
-					'NG token not found on mainnet or devnet. Please verify your mint address or check if you actually hold this token.'
-				);
-			}
-		} catch (err) {
-			console.error('❌ Error searching for token:', err);
-			setError(
-				`Search error: ${err instanceof Error ? err.message : 'Unknown error'}`
-			);
-		} finally {
-			setLoading(false);
-		}
-	};
 
 	if (!connected) {
 		return (
