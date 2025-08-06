@@ -1,23 +1,18 @@
 /** @type {import('next').NextConfig} */
-const isProd = process.env.NODE_ENV === 'production'
-const isGitHubPages = process.env.GITHUB_ACTIONS === 'true'
-
 const nextConfig = {
+  output: 'export',
   trailingSlash: false,
-  ...(isProd && { output: 'export' }),
-  ...(isProd && { distDir: 'out' }),
-  basePath: (isProd && isGitHubPages) ? '/apex' : '',
-  assetPrefix: (isProd && isGitHubPages) ? '/apex' : '',
+  skipTrailingSlashRedirect: true,
   images: {
-    unoptimized: true
+    unoptimized: true,
   },
-  
+
   transpilePackages: [
     '@solana/web3.js',
     '@solana/wallet-adapter-base',
     '@solana/wallet-adapter-react',
     '@solana/wallet-adapter-react-ui',
-    '@solana/wallet-adapter-wallets'
+    '@solana/wallet-adapter-wallets',
   ],
   
   webpack: (config) => {

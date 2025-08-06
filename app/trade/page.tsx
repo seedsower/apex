@@ -12,6 +12,7 @@ import { OrderForm } from '../../src/components/OrderForm';
 import { TokenBalances } from '../../src/components/TokenBalances';
 
 import { OrderFormData, UIMarketData } from '../../src/types';
+import { Logo } from '@/components/Logo';
 
 export default function TradePage() {
 	const [mounted, setMounted] = useState(false);
@@ -172,9 +173,7 @@ function TradePageContent() {
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 					<div className="flex justify-between items-center py-4">
 						<div>
-							<h1 className="text-2xl font-bold text-gray-900">
-								Apex Commodities Trading
-							</h1>
+							<Logo className="text-gray-900" />
 							<p className="text-sm text-gray-600">
 								Connected: {publicKey?.toString().slice(0, 8)}...
 							</p>

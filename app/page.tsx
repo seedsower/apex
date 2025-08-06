@@ -1,11 +1,13 @@
+import { Logo } from '@/components/Logo';
+
 export default function Home() {
 	return (
 		<main className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
 			<div className="container mx-auto px-4 py-16">
 				<div className="text-center mb-16">
-					<h1 className="text-6xl font-bold text-white mb-6">
-						Apex <span className="text-blue-500">Commodities</span>
-					</h1>
+					<div className="flex justify-center mb-6">
+						<Logo />
+					</div>
 					<p className="text-xl text-gray-300 max-w-3xl mx-auto">
 						High-performance commodities trading platform powered by Drift
 						Protocol v2. Trade perpetuals and spot markets with
