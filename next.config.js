@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  // output: 'export', // Temporarily disabled due to Next.js 15 App Router compatibility issues
   trailingSlash: false,
   skipTrailingSlashRedirect: true,
   images: {

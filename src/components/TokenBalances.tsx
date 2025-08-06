@@ -7,10 +7,7 @@ import {
 } from '../utils/tokenIntegration';
 import { formatTokenAmount } from '../utils/tokenIntegration';
 import { COMMODITY_TOKENS } from '../config/tokens';
-import {
-	verifyTokenOnNetwork,
-	findTokenNetwork,
-} from '../utils/tokenVerification';
+
 
 export const TokenBalances: React.FC = () => {
 	const { publicKey, connected } = useWallet();
