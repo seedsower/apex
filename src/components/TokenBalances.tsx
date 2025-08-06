@@ -238,75 +238,7 @@ export const TokenBalances: React.FC = () => {
 				</div>
 			)}
 
-			{/* NG Token Integration Status & Network Debug */}
-			<div className="mt-4 pt-4 border-t border-gray-200 space-y-3">
-				<div className="flex items-center justify-between">
-					<span className="text-sm font-medium text-gray-700">
-						NG Token Integration
-					</span>
-					<span
-						className={`text-xs px-2 py-1 rounded-full ${
-							COMMODITY_TOKENS.NG.mintAddress !==
-							'YOUR_NG_TOKEN_MINT_ADDRESS_HERE'
-								? 'bg-green-100 text-green-800'
-								: 'bg-yellow-100 text-yellow-800'
-						}`}
-					>
-						{COMMODITY_TOKENS.NG.mintAddress !==
-						'YOUR_NG_TOKEN_MINT_ADDRESS_HERE'
-							? 'Configured'
-							: 'Needs Setup'}
-					</span>
-				</div>
 
-				{/* Network Debug Info */}
-				{connected && (
-					<div className="text-xs space-y-1 bg-gray-100 p-2 rounded">
-						<div>
-							<strong>Wallet:</strong> {publicKey?.toString().slice(0, 8)}...
-							{publicKey?.toString().slice(-8)}
-						</div>
-						<div>
-							<strong>Network:</strong> {connection.rpcEndpoint}
-						</div>
-						<div>
-							<strong>NG Mint:</strong> {COMMODITY_TOKENS.NG.mintAddress}
-						</div>
-						<div>
-							<strong>Decimals:</strong> {COMMODITY_TOKENS.NG.decimals}
-						</div>
-					</div>
-				)}
-
-				{COMMODITY_TOKENS.NG.mintAddress ===
-					'YOUR_NG_TOKEN_MINT_ADDRESS_HERE' && (
-					<p className="text-xs text-gray-500 mt-1">
-						Update your NG token configuration in src/config/tokens.ts
-					</p>
-				)}
-
-				{/* Manual Refresh & Search Buttons */}
-				{connected &&
-					COMMODITY_TOKENS.NG.mintAddress !==
-						'YOUR_NG_TOKEN_MINT_ADDRESS_HERE' && (
-						<div className="space-y-2">
-							<button
-								onClick={fetchBalances}
-								disabled={loading}
-								className="w-full text-xs bg-blue-500 hover:bg-blue-600 text-white py-1 px-2 rounded disabled:opacity-50"
-							>
-								{loading ? 'Checking...' : 'Refresh Balances'}
-							</button>
-							<button
-								onClick={findMyNGToken}
-								disabled={loading}
-								className="w-full text-xs bg-green-500 hover:bg-green-600 text-white py-1 px-2 rounded disabled:opacity-50"
-							>
-								{loading ? 'Searching...' : 'Find My NG Token'}
-							</button>
-						</div>
-					)}
-			</div>
 		</div>
 	);
 };

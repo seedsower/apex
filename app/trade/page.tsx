@@ -82,88 +82,15 @@ function TradePageContent() {
 		// TODO: Implement order placement
 	};
 
-	// Wallet not connected
-	if (!connected) {
-		return (
-			<div className="min-h-screen bg-gray-50 flex items-center justify-center">
-				<div className="text-center bg-white p-8 rounded-lg shadow-lg max-w-md w-full mx-4">
-					<h1 className="text-3xl font-bold text-gray-900 mb-6">
-						Connect Your Wallet
-					</h1>
-					<p className="text-gray-600 mb-8">
-						Connect your Solana wallet to start trading
-					</p>
-					<WalletMultiButton />
-				</div>
-			</div>
-		);
-	}
+	// Note: Removed wallet connection requirement - users can now see the trading interface without connecting wallet first
 
-	// DriftService not ready
-	if (!isReady || driftState.loading) {
-		return (
-			<div className="min-h-screen bg-gray-50 flex items-center justify-center">
-				<div className="text-center">
-					<div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-					<p className="text-gray-600 mt-4">Initializing Drift Protocol...</p>
-				</div>
-			</div>
-		);
-	}
+	// Note: Removed Drift service readiness check - trading interface now loads without requiring Drift to be ready
 
-	// Error state
-	if (driftState.error) {
-		return (
-			<div className="min-h-screen bg-gray-50 flex items-center justify-center">
-				<div className="text-center bg-white p-8 rounded-lg shadow-lg max-w-md w-full mx-4">
-					<h1 className="text-2xl font-bold text-red-600 mb-4">
-						Connection Error
-					</h1>
-					<p className="text-gray-600 mb-6">{driftState.error}</p>
-					<button
-						onClick={() => window.location.reload()}
-						className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
-					>
-						Retry
-					</button>
-				</div>
-			</div>
-		);
-	}
+	// Note: Removed Drift error state check - trading interface now loads even with Drift connection errors
 
-	// User account creation needed
-	if (!userExists && !isCreatingUser) {
-		return (
-			<div className="min-h-screen bg-gray-50 flex items-center justify-center">
-				<div className="text-center bg-white p-8 rounded-lg shadow-lg max-w-md w-full mx-4">
-					<h1 className="text-3xl font-bold text-gray-900 mb-6">
-						Create Trading Account
-					</h1>
-					<p className="text-gray-600 mb-8">
-						Create your Drift trading account to start trading commodities
-					</p>
-					<button
-						onClick={handleCreateUser}
-						className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 font-medium"
-					>
-						Create Account
-					</button>
-				</div>
-			</div>
-		);
-	}
+	// Note: Removed full-screen create account modal - now handled in header
 
-	// User account creation in progress
-	if (isCreatingUser) {
-		return (
-			<div className="min-h-screen bg-gray-50 flex items-center justify-center">
-				<div className="text-center">
-					<div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-					<p className="text-gray-600 mt-4">Creating your trading account...</p>
-				</div>
-			</div>
-		);
-	}
+	// Note: User account creation progress now handled in header button
 
 	// ✅ MAIN TRADING DASHBOARD - This should now appear!
 	return (
@@ -175,10 +102,28 @@ function TradePageContent() {
 						<div>
 							<Logo className="text-gray-900" />
 							<p className="text-sm text-gray-600">
-								Connected: {publicKey?.toString().slice(0, 8)}...
+								{connected
+									? `Connected: ${publicKey?.toString().slice(0, 8)}...`
+									: 'Connect your wallet to start trading'}
 							</p>
 						</div>
 						<div className="flex items-center space-x-4">
+							{connected && !userExists && !isCreatingUser && (
+								<button
+									onClick={handleCreateUser}
+									className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium text-sm"
+								>
+									Create Account
+								</button>
+							)}
+							{connected && isCreatingUser && (
+								<button
+									disabled
+									className="bg-gray-400 text-white px-4 py-2 rounded-lg font-medium text-sm cursor-not-allowed"
+								>
+									Creating...
+								</button>
+							)}
 							<WalletMultiButton />
 						</div>
 					</div>

@@ -1,4 +1,5 @@
 import { Logo } from '@/components/Logo';
+import Link from 'next/link';
 
 export default function Home() {
 	return (
@@ -22,12 +23,12 @@ export default function Home() {
 				</div>
 
 				<div className="text-center">
-					<a
+					<Link
 						href="/trade"
 						className="inline-block bg-green-600 hover:bg-green-700 text-white text-lg px-8 py-4 rounded-xl font-semibold"
 					>
 						Start Trading
-					</a>
+					</Link>
 				</div>
 			</div>
 		</main>
