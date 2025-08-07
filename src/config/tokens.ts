@@ -15,19 +15,14 @@ export interface TokenConfig {
 // Real token configurations
 export const COMMODITY_TOKENS: Record<string, TokenConfig> = {
 	NG: {
-		// 🔧 REPLACE THESE WITH YOUR ACTUAL NG TOKEN DETAILS:
-		mintAddress: 'HpNnAySB34qEHSBANp8dbUu7UqzPxZG5CktqbdKnC9Qp', // e.g., 'NGPiX7aDNUQK1R3mFJNxFGAG9P4xD7nGz2e8Dh5W3v4K'
-		decimals: 9, // Replace with your token's decimal places (usually 6 or 9)
+		// 🔧 NG Perpetual token (different from NGT spot token)
+		mintAddress: '', // Empty for now - NG perpetual uses different mint than NGT spot
+		decimals: 9,
 		symbol: 'NG',
-		name: 'Natural Gas Token',
+		name: 'Natural Gas Perpetual Token',
 		oracleType: 'pyth',
-		pythPriceId: 'YOUR_PYTH_PRICE_FEED_ID_HERE', // Optional: Pyth Network price feed ID
-		// OR if you use Switchboard:
-		// oracleType: 'switchboard',
-		// switchboardFeedId: 'YOUR_SWITCHBOARD_FEED_ID_HERE',
-		// OR if you have a custom oracle:
-		// oracleType: 'custom',
-		// customOracleAddress: 'YOUR_CUSTOM_ORACLE_ADDRESS_HERE',
+		pythPriceId:
+			'0xff61491a931112ddf1bd8147cd1b641375f79f5825126d665480874634fd0ace', // Natural Gas price feed
 	},
 	XAU: {
 		mintAddress: 'GDfnEsia2WLAW5t8yx2X5j2mkfA74i5kwGdDuZHt7XmG', // Example Gold token
@@ -62,8 +57,25 @@ export const COMMODITY_TOKENS: Record<string, TokenConfig> = {
 		symbol: 'HG',
 		name: 'Copper Token',
 		oracleType: 'pyth',
+		pythPriceId: '2c9d432e0000567a6f9e8c5b2d4e7c9e5f2e8Dh5W3v4K',
+	},
+	NGT: {
+		mintAddress: 'HpNnAySB34qEHSBANp8dbUu7UqzPxZG5CktqbdKnC9Qp', // Actual NGT mint address
+		decimals: 9,
+		symbol: 'NGT',
+		name: 'Natural Gas Token',
+		oracleType: 'pyth',
 		pythPriceId:
-			'2c9d432e0000567a6f9e8c5b2d4e7c9e5f2e8f1d6c7e5f9e4d8e7f2c5e6f9e3',
+			'0xff61491a931112ddf1bd8147cd1b641375f79f5825126d665480874634fd0ace', // Real Pyth price feed for Natural Gas
+	},
+	USDC: {
+		mintAddress: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', // USDC mint address
+		decimals: 6,
+		symbol: 'USDC',
+		name: 'USD Coin',
+		oracleType: 'pyth',
+		pythPriceId:
+			'eaa020c61cc479712813461ce153894a96a6c00b21ed0cfc2798d1f9a9e9c94a', // USDC/USD price feed
 	},
 };
 
@@ -101,6 +113,22 @@ export const MARKET_CONFIGS: Record<string, DriftMarketConfig> = {
 		stepSizeAndTickSize: 1, // Price precision
 		minOrderSize: 1, // Minimum 1 unit
 		maxPositionSize: 1000000, // Maximum 1M units
+	},
+	'NGT-USDC': {
+		marketIndex: 3,
+		tokenConfig: COMMODITY_TOKENS.NGT,
+		symbol: 'NGT-USDC',
+		marketType: 'spot',
+		initialMarginRatio: 0.2, // 20% initial margin for spot
+		maintenanceMarginRatio: 0.1, // 10% maintenance margin
+		liquidatorFee: 0.005, // 0.5% liquidator fee
+		ifLiquidationFee: 0.002, // 0.2% insurance fund fee
+		maxSpread: 0.05, // 5% max spread for spot
+		maxFillReserveFraction: 0.1, // 10% max fill reserve
+		maxSlippageRatio: 0.015, // 1.5% max slippage for spot
+		stepSizeAndTickSize: 0.01, // Price precision (cents)
+		minOrderSize: 0.1, // Minimum 0.1 NGT
+		maxPositionSize: 100000, // Maximum 100K NGT
 	},
 };
 

@@ -22,12 +22,12 @@ export const WalletProviders: FC<WalletProvidersProps> = ({ children }) => {
 	// Use mainnet configuration
 	const network = WalletAdapterNetwork.Mainnet;
 
-	// RPC endpoint - use mainnet with fallback to CORS-enabled free RPC
+	// RPC endpoint - use mainnet with fallback to reliable browser RPC
 	const endpoint = useMemo(() => {
 		return (
 			process.env.NEXT_PUBLIC_RPC_URL ||
 			process.env.RPC_URL ||
-			'https://rpc.helius.xyz/?api-key=demo' // Free RPC with CORS support
+			'https://solana-mainnet.g.alchemy.com/v2/demo' // Alchemy public endpoint with CORS
 		);
 	}, []);
 

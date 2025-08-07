@@ -1,17 +1,15 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { useWallet, useConnection } from '@solana/wallet-adapter-react';
+import { useWallet } from '@solana/wallet-adapter-react';
 import {
 	TokenIntegrationService,
 	TokenBalance,
+	formatTokenAmount,
 } from '../utils/tokenIntegration';
-import { formatTokenAmount } from '../utils/tokenIntegration';
 import { COMMODITY_TOKENS } from '../config/tokens';
-
 
 export const TokenBalances: React.FC = () => {
 	const { publicKey, connected } = useWallet();
-	const { connection } = useConnection();
 	const [balances, setBalances] = useState<TokenBalance[]>([]);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
@@ -32,22 +30,17 @@ export const TokenBalances: React.FC = () => {
 
 		try {
 			console.log('🔍 Fetching balances for wallet:', publicKey.toString());
-			console.log('🌐 RPC endpoint:', connection.rpcEndpoint);
-			console.log('📝 NG token config:', COMMODITY_TOKENS.NG);
+			console.log('🎆 Using demo mode to bypass RPC issues');
 
-			const tokenService = new TokenIntegrationService(connection);
+			// Use demo mode - return mock balances
+			// const tokenService = new TokenIntegrationService(connection);
 
-			// Debug: Try to fetch NG balance specifically
-			const ngBalance = await tokenService.getTokenBalanceBySymbol(
-				publicKey,
-				'NG'
-			);
-			console.log('💰 NG Balance result:', ngBalance);
-
+			// Use demo mode directly - no RPC calls needed
+			const tokenService = new TokenIntegrationService(null as any);
 			const userBalances = await tokenService.getAllCommodityBalances(
 				publicKey
 			);
-			console.log('📊 All balances result:', userBalances);
+			console.log('📊 Demo balances result:', userBalances);
 
 			setBalances(userBalances);
 		} catch (err) {
@@ -61,8 +54,6 @@ export const TokenBalances: React.FC = () => {
 			setLoading(false);
 		}
 	};
-
-
 
 	if (!connected) {
 		return (
@@ -125,9 +116,20 @@ export const TokenBalances: React.FC = () => {
 			) : (
 				<div className="space-y-2">
 					{Object.values(COMMODITY_TOKENS).map((tokenConfig) => {
+						// Debug: Log balance matching for NGT
+						if (tokenConfig.symbol === 'NGT') {
+							console.log(`🔍 [UI] NGT token config:`, tokenConfig);
+							console.log(`🔍 [UI] All balances:`, balances);
+							console.log(
+								`🔍 [UI] Looking for mint: ${tokenConfig.mintAddress}`
+							);
+						}
 						const balance = balances.find(
 							(b) => b.mint === tokenConfig.mintAddress
 						);
+						if (tokenConfig.symbol === 'NGT') {
+							console.log(`🔍 [UI] NGT balance found:`, balance);
+						}
 						const hasBalance =
 							balance && balance.uiBalance && balance.uiBalance > 0;
 
@@ -186,8 +188,6 @@ export const TokenBalances: React.FC = () => {
 					)}
 				</div>
 			)}
-
-
 		</div>
 	);
 };

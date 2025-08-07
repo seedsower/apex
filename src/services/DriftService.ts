@@ -168,8 +168,25 @@ export class DriftService extends EventEmitter {
 					isActive: true,
 					marketAccount: {} as any,
 				},
+				// NGT-USDC Spot Market for Natural Gas Token trading
 				{
 					marketIndex: 3,
+					symbol: 'NGT-USDC',
+					baseAssetSymbol: 'NGT',
+					quoteAssetSymbol: 'USDC',
+					oracleSource: 'Pyth',
+					marketType: 'spot',
+					lastPrice: 2.85,
+					priceChange24h: 1.25,
+					volume24h: 125000,
+					isActive: true,
+					tokenMint: COMMODITY_TOKENS.NGT?.mintAddress || '',
+					decimals: COMMODITY_TOKENS.NGT?.decimals || 9,
+					pythPriceId: COMMODITY_TOKENS.NGT?.pythPriceId || '',
+					marketAccount: {} as any,
+				},
+				{
+					marketIndex: 4,
 					symbol: 'XAU-PERP',
 					baseAssetSymbol: 'XAU',
 					quoteAssetSymbol: 'USDC',
@@ -184,7 +201,7 @@ export class DriftService extends EventEmitter {
 					marketAccount: {} as any,
 				},
 				{
-					marketIndex: 4,
+					marketIndex: 5,
 					symbol: 'XAG-PERP',
 					baseAssetSymbol: 'XAG',
 					quoteAssetSymbol: 'USDC',
@@ -199,7 +216,7 @@ export class DriftService extends EventEmitter {
 					marketAccount: {} as any,
 				},
 				{
-					marketIndex: 5,
+					marketIndex: 6,
 					symbol: 'WTI-PERP',
 					baseAssetSymbol: 'WTI',
 					quoteAssetSymbol: 'USDC',
@@ -214,7 +231,7 @@ export class DriftService extends EventEmitter {
 					marketAccount: {} as any,
 				},
 				{
-					marketIndex: 6,
+					marketIndex: 7,
 					symbol: 'NG-PERP',
 					baseAssetSymbol: 'NG',
 					quoteAssetSymbol: 'USDC',
@@ -233,7 +250,7 @@ export class DriftService extends EventEmitter {
 					marketAccount: {} as any,
 				},
 				{
-					marketIndex: 7,
+					marketIndex: 8,
 					symbol: 'HG-PERP',
 					baseAssetSymbol: 'HG',
 					quoteAssetSymbol: 'USDC',

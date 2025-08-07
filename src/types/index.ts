@@ -20,6 +20,8 @@ export interface UIMarketData {
 	oracleSource: string;
 	marketType: 'perp' | 'spot';
 	lastPrice: number;
+	markPrice?: number; // Current mark price for trading
+	oraclePrice?: number; // Oracle price feed
 	priceChange24h: number;
 	volume24h: number;
 	openInterest?: number;
